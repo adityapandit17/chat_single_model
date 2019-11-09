@@ -1,0 +1,28 @@
+<li style="margin-top: 10px;">
+  <div class="panel panel-default" data-conversation-id="<%= conversation.id %>">
+    <div class="panel-heading">
+      <%= link_to conversation.opposed_user(user).email, '', class: 'toggle-window' %>
+      <%= link_to "x", close_conversation_path(conversation), class: "btn btn-default btn-xs pull-right", remote: true, method: :post %>
+    </div>
+
+    <div class="panel-body" style="display: none;">
+      <div class="messages-list">
+        <ul>
+          <%= render 'conversations/conversation_content', messages: conversation.messages, user: user %>
+        </ul>
+      </div>
+      <form class="new_message form-group">
+        <input name="conversation_id" type="hidden" value="<%= conversation.id %>">
+        <input name="user_id" type="hidden" value="<%= user.id %>">
+        <div style="margin-right: 20px;">
+          <input type="text" name="body" class="form-control">
+        </div>
+        <input type="submit" class="btn btn-success btn-sub" value="Send" style="margin-top: 5px;">
+      </form>
+    </div>
+  </div>
+</li>
+
+<style type="text/css">
+  .emoji-picker-icon {margin-right: 20px;}
+</style>
